@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AudioPlayer from '../components/AudioPlayer.svelte';
+	import AudioPlayer from '../lib/AudioPlayer.svelte';
 
 	let playPause = $state(() => {});
 	let isPlaying = $state(false);
