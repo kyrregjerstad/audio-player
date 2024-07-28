@@ -1,11 +1,10 @@
 <script lang="ts">
-	import { type WaveSurferOptions } from 'wavesurfer.js';
-	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
 	import { onDestroy, onMount } from 'svelte';
+	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
 	import { setAudioPlayer } from './audioPlayerManager.svelte.js';
+	import type { PlayerOptions } from './createAudioPlayer.js';
 
 	type Props = {
-		src: string;
 		isPlaying?: boolean;
 		progress?: number;
 		togglePlayPause?: () => void;
@@ -14,11 +13,9 @@
 		stop?: () => void;
 		setVolume?: (volume: number) => void;
 		class?: string;
-		exclusive?: boolean;
-	} & Omit<WaveSurferOptions, 'container' | 'audioprocess' | 'finish' | 'stop'>;
+	} & PlayerOptions;
 
 	let {
-		src,
 		class: className,
 		isPlaying = $bindable(false),
 		progress = $bindable(0),
@@ -27,15 +24,14 @@
 		stop = $bindable(),
 		pause = $bindable(),
 		setVolume = $bindable(),
-		exclusive = false,
-		...wavesurferRest
+		...rest
 	}: Props = $props();
 
 	let container: HTMLDivElement;
 	let audioPlayer = $state<AudioPlayerInstance>();
 
 	onMount(() => {
-		audioPlayer = setAudioPlayer(container, src, wavesurferRest, exclusive);
+		audioPlayer = setAudioPlayer({ container, options: rest });
 
 		togglePlayPause = () => audioPlayer?.togglePlayPause();
 		pause = () => audioPlayer?.pause();

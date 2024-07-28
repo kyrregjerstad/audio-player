@@ -39,13 +39,13 @@ export class AudioPlayerManager {
 
 const AUDIO_PLAYER_KEY = Symbol('AUDIO_PLAYER');
 
-export function setAudioPlayer(
-	container: HTMLElement,
-	src: string,
-	options: PlayerOptions,
-	exclusive: boolean
-) {
-	const player = new AudioPlayerInstance(container, src, options, exclusive);
+type SetAudioPlayer = {
+	container: HTMLElement;
+	options: PlayerOptions;
+};
+
+export function setAudioPlayer({ container, options }: SetAudioPlayer) {
+	const player = new AudioPlayerInstance(container, options);
 	AudioPlayerManager.registerPlayer(player);
 	return setContext(AUDIO_PLAYER_KEY, player);
 }

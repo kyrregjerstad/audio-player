@@ -16,20 +16,16 @@ export interface IAudioPlayer {
 export type PlayerOptions = Omit<
 	WaveSurferOptions,
 	'container' | 'audioprocess' | 'finish' | 'stop'
->;
+> & { src: string; exclusive?: boolean };
 /**
  * wrapper for wavesurfer.js for easy dependency injection
  */
-export function createAudioPlayer(
-	container: HTMLElement,
-	src: string,
-	options: PlayerOptions
-): IAudioPlayer {
+export function createAudioPlayer(container: HTMLElement, options: PlayerOptions): IAudioPlayer {
 	const wavesurfer = WaveSurfer.create({
 		...options,
 		container
 	});
-	wavesurfer.load(src);
+	wavesurfer.load(options.src);
 
 	return {
 		togglePlayPause: () => wavesurfer.playPause(),

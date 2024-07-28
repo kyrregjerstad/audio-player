@@ -1,7 +1,19 @@
 import { AudioPlayerManager } from './audioPlayerManager.svelte.js';
 import { type IAudioPlayer, type PlayerOptions, createAudioPlayer } from './createAudioPlayer.js';
 
-export class AudioPlayerInstance {
+export interface IAudioPlayerInstance {
+	isPlaying: boolean;
+	progress: number;
+	player: IAudioPlayer;
+	exclusive: boolean;
+	togglePlayPause: () => void;
+	pause: () => void;
+	stop: () => void;
+	setVolume: (volume: number) => void;
+	destroy: () => void;
+}
+
+export class AudioPlayerInstance implements IAudioPlayerInstance {
 	isPlaying = $state(false);
 	progress = $state(0);
 	player: IAudioPlayer;
@@ -9,17 +21,14 @@ export class AudioPlayerInstance {
 
 	constructor(
 		container: HTMLElement,
-		src: string,
 		options: PlayerOptions,
-		exclusive: boolean,
 		implementation: (
 			container: HTMLElement,
-			src: string,
 			options: PlayerOptions
 		) => IAudioPlayer = createAudioPlayer
 	) {
-		this.exclusive = exclusive;
-		this.player = implementation(container, src, options);
+		this.exclusive = options.exclusive || false;
+		this.player = implementation(container, options);
 
 		this.player.onAudioProcess(() => {
 			this.progress = this.player.getCurrentTime() / this.player.getDuration();
