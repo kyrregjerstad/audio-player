@@ -1,5 +1,5 @@
 <script lang="ts">
-	import AudioPlayer from '../lib/AudioPlayer.svelte';
+	import AudioPlayer from '$lib/AudioPlayer.svelte';
 
 	let playPause1 = $state(() => {});
 	let playPause2 = $state(() => {});

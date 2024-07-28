@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
+	import { onMount } from 'svelte';
 	import { type WaveSurferOptions } from 'wavesurfer.js';
-	import { AudioPlayerManager, setAudioPlayer } from './audioPlayer.svelte.js';
+	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
+	import { setAudioPlayer } from './audioPlayerManager.svelte.js';
 
 	type Props = {
 		src: string;
@@ -31,18 +32,20 @@
 	}: Props = $props();
 
 	let container: HTMLDivElement;
-	let audioPlayerManager = $state<AudioPlayerManager>();
+	let audioPlayer = $state<AudioPlayerInstance | null>(null);
 
 	onMount(() => {
-		audioPlayerManager = setAudioPlayer(container, src, wavesurferRest, exclusive);
+		audioPlayer = setAudioPlayer(container, src, wavesurferRest, exclusive);
 
-		togglePlayPause = () => audioPlayerManager?.playPause();
-		pause = () => audioPlayerManager?.pause();
-		stop = () => audioPlayerManager?.stop();
-		setVolume = (volume: number) => audioPlayerManager?.setVolume(volume);
+		togglePlayPause = () => audioPlayer?.playPause();
+		pause = () => audioPlayer?.pause();
+		stop = () => audioPlayer?.stop();
+		setVolume = (volume: number) => audioPlayer?.setVolume(volume);
 
-		isPlaying = audioPlayerManager.isPlayingState;
-		progress = audioPlayerManager.progressState;
+		isPlaying = audioPlayer.isPlayingState;
+		progress = audioPlayer.progressState;
+
+		console.log('progress', progress);
 	});
 </script>
 
