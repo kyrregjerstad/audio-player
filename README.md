@@ -1,6 +1,6 @@
 # svelteSonic
 
-simple audio player for svelte, based on [wavesurfer.js](https://github.com/katspaugh/wavesurfer.js). It's Svelte 5 runes for reactivity.
+simple audio player for svelte, based on [wavesurfer.js](https://github.com/katspaugh/wavesurfer.js). It's using Svelte 5 runes for reactivity.
 
 ## Installation
 
