@@ -42,10 +42,10 @@
 		stop = () => audioPlayer?.stop();
 		setVolume = (volume: number) => audioPlayer?.setVolume(volume);
 
-		isPlaying = audioPlayer.isPlayingState;
-		progress = audioPlayer.progressState;
-
-		console.log('progress', progress);
+		$effect(() => {
+			progress = audioPlayer?.progressState || 0;
+			isPlaying = audioPlayer?.isPlayingState || false;
+		});
 	});
 </script>
 

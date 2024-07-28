@@ -34,7 +34,7 @@ export class AudioPlayerInstance {
 		});
 
 		$effect(() => {
-			this.progress = this.player.getCurrentTime() / this.player.getDuration();
+			this.progress = this.player.getCurrentTime() / this.player.getDuration() || 0;
 		});
 	}
 
