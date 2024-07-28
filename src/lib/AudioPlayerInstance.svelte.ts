@@ -65,6 +65,10 @@ export class AudioPlayerInstance {
 		this.player.setVolume(volume);
 	}
 
+	destroy() {
+		this.player.destroy();
+	}
+
 	get isPlayingState() {
 		return this.isPlaying;
 	}

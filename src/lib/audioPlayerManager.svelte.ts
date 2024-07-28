@@ -1,6 +1,6 @@
 import { setContext, getContext } from 'svelte';
 import { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
-import { type PlayerOptions } from './CreateAudioPlayer';
+import { type PlayerOptions } from './createAudioPlayer.js';
 
 let globalIsPlaying = $state(false);
 let globalPlayPause = $state<(() => void)[]>([]);

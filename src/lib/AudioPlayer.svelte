@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { type WaveSurferOptions } from 'wavesurfer.js';
 	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { setAudioPlayer } from './audioPlayerManager.svelte.js';
 
 	type Props = {
@@ -47,6 +47,10 @@
 			progress = audioPlayer?.progressState || 0;
 			isPlaying = audioPlayer?.isPlayingState || false;
 		});
+	});
+
+	onDestroy(() => {
+		audioPlayer?.destroy();
 	});
 </script>
 

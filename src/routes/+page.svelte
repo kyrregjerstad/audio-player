@@ -20,7 +20,6 @@
 <AudioPlayer
 	src="/audio/voice-sample-1.mp3"
 	barWidth={3}
-	exclusive={true}
 	bind:togglePlayPause={playPause2}
 	bind:isPlaying={isPlaying2}
 	bind:progress={progress2}
