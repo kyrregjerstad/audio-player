@@ -42,8 +42,15 @@ export class AudioPlayerInstance implements IAudioPlayerInstance {
 			}
 		});
 
-		$effect(() => {
-			this.progress = this.player.getCurrentTime() / this.player.getDuration() || 0;
+		$effect.root(() => {
+			$effect(() => {
+				this.progress = this.player.getCurrentTime() / this.player.getDuration() || 0;
+			});
+
+			return () => {
+				this.player.destroy();
+				AudioPlayerManager.unregisterPlayer(this);
+			};
 		});
 	}
 
