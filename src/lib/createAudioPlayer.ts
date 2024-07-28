@@ -1,7 +1,7 @@
 import WaveSurfer, { type WaveSurferOptions } from 'wavesurfer.js';
 
 export interface IAudioPlayer {
-	playPause: () => void;
+	togglePlayPause: () => void;
 	pause: () => void;
 	stop: () => void;
 	setVolume: (volume: number) => void;
@@ -32,7 +32,7 @@ export function createAudioPlayer(
 	wavesurfer.load(src);
 
 	return {
-		playPause: () => wavesurfer.playPause(),
+		togglePlayPause: () => wavesurfer.playPause(),
 		pause: () => wavesurfer.pause(),
 		stop: () => wavesurfer.stop(),
 		setVolume: (volume: number) => wavesurfer.setVolume(volume),

@@ -1,5 +1,5 @@
 import { AudioPlayerManager } from './audioPlayerManager.svelte.js';
-import { type IAudioPlayer, type PlayerOptions, createAudioPlayer } from './CreateAudioPlayer.js';
+import { type IAudioPlayer, type PlayerOptions, createAudioPlayer } from './createAudioPlayer.js';
 
 export class AudioPlayerInstance {
 	isPlaying = $state(false);
@@ -38,7 +38,7 @@ export class AudioPlayerInstance {
 		});
 	}
 
-	playPause() {
+	togglePlayPause() {
 		if (this.exclusive) {
 			AudioPlayerManager.players.forEach((player) => {
 				if (player !== this) {
@@ -47,7 +47,7 @@ export class AudioPlayerInstance {
 			});
 		}
 		this.isPlaying = !this.isPlaying;
-		this.player.playPause();
+		this.player.togglePlayPause();
 	}
 
 	pause() {

@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import { type WaveSurferOptions } from 'wavesurfer.js';
 	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
+	import { onMount } from 'svelte';
 	import { setAudioPlayer } from './audioPlayerManager.svelte.js';
 
 	type Props = {
@@ -32,13 +32,14 @@
 	}: Props = $props();
 
 	let container: HTMLDivElement;
-	let audioPlayer = $state<AudioPlayerInstance | null>(null);
+	let audioPlayer = $state<AudioPlayerInstance>();
 
 	onMount(() => {
 		audioPlayer = setAudioPlayer(container, src, wavesurferRest, exclusive);
 
-		togglePlayPause = () => audioPlayer?.playPause();
+		togglePlayPause = () => audioPlayer?.togglePlayPause();
 		pause = () => audioPlayer?.pause();
+		togglePlayPause;
 		stop = () => audioPlayer?.stop();
 		setVolume = (volume: number) => audioPlayer?.setVolume(volume);
 
