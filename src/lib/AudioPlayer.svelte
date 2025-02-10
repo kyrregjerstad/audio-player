@@ -1,53 +1,65 @@
 <script lang="ts">
-	import { onDestroy, onMount } from 'svelte';
-	import type { AudioPlayerInstance } from './AudioPlayerInstance.svelte.js';
-	import { setAudioPlayer } from './audioPlayerManager.svelte.js';
 	import type { PlayerOptions } from './createAudioPlayer.js';
+	import { setAudioPlayer, type AudioPlayerState } from './audioPlayerAction.svelte.js';
 
 	type Props = {
+		class?: string;
 		isPlaying?: boolean;
 		progress?: number;
+		volume?: number;
+		currentTime?: number;
+		duration?: number;
 		togglePlayPause?: () => void;
 		play?: () => void;
 		pause?: () => void;
 		stop?: () => void;
 		setVolume?: (volume: number) => void;
-		class?: string;
 	} & PlayerOptions;
 
 	let {
 		class: className,
 		isPlaying = $bindable(false),
 		progress = $bindable(0),
+		volume = $bindable(1),
+		currentTime = $bindable(0),
+		duration = $bindable(0),
 		togglePlayPause = $bindable(),
 		play = $bindable(),
-		stop = $bindable(),
 		pause = $bindable(),
+		stop = $bindable(),
 		setVolume = $bindable(),
-		...rest
+		...options
 	}: Props = $props();
 
-	let container: HTMLDivElement;
-	let audioPlayer = $state<AudioPlayerInstance>();
+	let element = $state<HTMLElement>();
+	let playerState = $state<AudioPlayerState>();
 
-	onMount(() => {
-		audioPlayer = setAudioPlayer({ container, options: rest });
+	$effect(() => {
+		if (element) {
+			const state = setAudioPlayer({ node: element, options });
+			playerState = state;
 
-		togglePlayPause = () => audioPlayer?.togglePlayPause();
-		pause = () => audioPlayer?.pause();
-		togglePlayPause;
-		stop = () => audioPlayer?.stop();
-		setVolume = (volume: number) => audioPlayer?.setVolume(volume);
+			// Bind state
+			$effect(() => {
+				isPlaying = state.isPlaying;
+				progress = state.progress;
+				volume = state.volume;
+				currentTime = state.currentTime;
+				duration = state.duration;
+			});
 
-		$effect(() => {
-			progress = audioPlayer?.progressState || 0;
-			isPlaying = audioPlayer?.isPlayingState || false;
-		});
-	});
+			// Bind methods
+			togglePlayPause = () => state.togglePlayPause();
+			play = () => state.play();
+			pause = () => state.pause();
+			stop = () => state.stop();
+			setVolume = (v: number) => state.setVolume(v);
 
-	onDestroy(() => {
-		audioPlayer?.destroy();
+			return () => {
+				state.destroy();
+			};
+		}
 	});
 </script>
 
-<div class={className} bind:this={container}></div>
+<div class={className} bind:this={element}></div>

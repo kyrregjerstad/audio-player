@@ -23,6 +23,7 @@
 	bind:togglePlayPause={playPause2}
 	bind:isPlaying={isPlaying2}
 	bind:progress={progress2}
+	exclusive={true}
 />
 
 <button onclick={playPause1}> {isPlaying1 ? 'Pause' : 'Play'} </button>
