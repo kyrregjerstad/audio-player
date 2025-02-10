@@ -25,37 +25,37 @@
 		"!dist/**/*.spec.*"
 	],
 	"peerDependencies": {
-		"svelte": "^5.0.0-next.1"
+		"svelte": "^5.19.9"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.2.2",
-		"@sveltejs/kit": "^2.5.18",
-		"@sveltejs/package": "^2.3.2",
-		"@sveltejs/vite-plugin-svelte": "^3.1.1",
-		"@testing-library/jest-dom": "^6.4.8",
-		"@testing-library/svelte": "^5.2.1",
-		"@types/eslint": "^9.6.0",
-		"@vitest/ui": "^2.0.4",
-		"eslint": "^9.8.0",
-		"eslint-config-prettier": "^9.1.0",
-		"eslint-plugin-svelte": "^2.43.0",
-		"globals": "^15.8.0",
-		"jsdom": "^24.1.1",
-		"prettier": "^3.3.3",
-		"prettier-plugin-svelte": "^3.2.6",
-		"publint": "^0.1.16",
-		"svelte": "5.0.0-next.200",
-		"svelte-check": "^3.8.4",
-		"typescript": "^5.5.4",
-		"typescript-eslint": "8.0.0-alpha.54",
-		"vite": "^5.3.5",
-		"vitest": "^2.0.4"
+		"@sveltejs/adapter-auto": "^4.0.0",
+		"@sveltejs/kit": "^2.17.1",
+		"@sveltejs/package": "^2.3.10",
+		"@sveltejs/vite-plugin-svelte": "^5.0.3",
+		"@testing-library/jest-dom": "^6.6.3",
+		"@testing-library/svelte": "^5.2.6",
+		"@types/eslint": "^9.6.1",
+		"@vitest/ui": "^3.0.5",
+		"eslint": "^9.20.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-svelte": "^2.46.1",
+		"globals": "^15.14.0",
+		"jsdom": "^26.0.0",
+		"prettier": "^3.5.0",
+		"prettier-plugin-svelte": "^3.3.3",
+		"publint": "^0.3.4",
+		"svelte": "5.19.9",
+		"svelte-check": "^4.1.4",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "8.23.0",
+		"vite": "^6.1.0",
+		"vitest": "^3.0.5"
 	},
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
 	"dependencies": {
-		"wavesurfer.js": "^7.8.2"
+		"wavesurfer.js": "^7.9.0"
 	},
 	"license": "MIT"
 }
